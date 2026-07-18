@@ -1,7 +1,15 @@
 function Navbar() {
   return (
-    <nav>
-      <h2>ShopSphere</h2>
+    <nav className="navbar">
+      <h2 className="logo">🛍️ ShopSphere</h2>
+
+      <ul className="nav-links">
+        <li>Home</li>
+        <li>Products</li>
+        <li>Wishlist</li>
+        <li>Cart</li>
+        <li>Login</li>
+      </ul>
     </nav>
   );
 }
