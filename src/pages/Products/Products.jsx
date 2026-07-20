@@ -1,6 +1,10 @@
+import ProductGrid from "../../components/products/ProductGrid";
+
 function Products() {
   return (
-    <h1>Products Page</h1>
+    <>
+      <ProductGrid />
+    </>
   );
 }
 
