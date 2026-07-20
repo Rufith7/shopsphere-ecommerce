@@ -1,5 +1,16 @@
-import Navbar from "./components/Navbar";
-import Footer from "./components/Footer";
+import "./App.css";
+
+import { Routes, Route } from "react-router-dom";
+
+import Navbar from "./components/layout/Navbar";
+import Footer from "./components/layout/Footer";
+
+import Home from "./pages/Home/Home";
+import Products from "./pages/Products/Products";
+import Cart from "./pages/Cart/Cart";
+import Wishlist from "./pages/Wishlist/Wishlist";
+import Login from "./pages/Login/Login";
+import ProductDetails from "./pages/ProductDetails/ProductDetails";
 
 function App() {
   return (
@@ -7,8 +18,39 @@ function App() {
       <Navbar />
 
       <main>
-        <h1>Welcome to ShopSphere 🛍️</h1>
-        <p>Your modern React e-commerce application is under development.</p>
+        <Routes>
+
+          <Route 
+            path="/" 
+            element={<Home />} 
+          />
+
+          <Route 
+            path="/products" 
+            element={<Products />} 
+          />
+
+          <Route 
+            path="/products/:id" 
+            element={<ProductDetails />} 
+          />
+
+          <Route 
+            path="/cart" 
+            element={<Cart />} 
+          />
+
+          <Route 
+            path="/wishlist" 
+            element={<Wishlist />} 
+          />
+
+          <Route 
+            path="/login" 
+            element={<Login />} 
+          />
+
+        </Routes>
       </main>
 
       <Footer />
