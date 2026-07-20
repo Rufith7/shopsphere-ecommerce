@@ -2,9 +2,13 @@ import { useParams } from "react-router-dom";
 
 import products from "../../data/products";
 
+import ProductInfo from "../../components/products/details/ProductInfo";
+
+
 function ProductDetails() {
 
   const { id } = useParams();
+
 
   const product = products.find(
     (item) => item.id === Number(id)
@@ -17,31 +21,24 @@ function ProductDetails() {
 
 
   return (
+
     <section className="product-details">
 
-      <img 
-        src={product.image} 
-        alt={product.title}
-      />
+      <div className="product-image">
 
-      <div>
-
-        <h1>{product.title}</h1>
-
-        <h2>{product.price}</h2>
-
-        <p>
-          This is a premium quality product.
-          Experience the best performance and design.
-        </p>
-
-        <button>
-          Add to Cart
-        </button>
+        <img
+          src={product.image}
+          alt={product.title}
+        />
 
       </div>
 
+
+      <ProductInfo product={product} />
+
+
     </section>
+
   );
 }
 
