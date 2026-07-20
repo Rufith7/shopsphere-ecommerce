@@ -1,11 +1,15 @@
 import "./App.css";
 
+import { Routes, Route } from "react-router-dom";
+
 import Navbar from "./components/layout/Navbar";
-import Hero from "./components/home/Hero";
-import ProductCard from "./components/products/ProductCard";
 import Footer from "./components/layout/Footer";
 
-import products from "./data/products";
+import Home from "./pages/Home/Home";
+import Products from "./pages/Products/Products";
+import Cart from "./pages/Cart/Cart";
+import Wishlist from "./pages/Wishlist/Wishlist";
+import Login from "./pages/Login/Login";
 
 function App() {
   return (
@@ -13,22 +17,13 @@ function App() {
       <Navbar />
 
       <main>
-        <Hero />
-
-        <section className="products-section">
-          <h2>Featured Products</h2>
-
-          <div className="products-grid">
-            {products.map((product) => (
-              <ProductCard
-                key={product.id}
-                title={product.title}
-                price={product.price}
-                image={product.image}
-              />
-            ))}
-          </div>
-        </section>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/products" element={<Products />} />
+          <Route path="/cart" element={<Cart />} />
+          <Route path="/wishlist" element={<Wishlist />} />
+          <Route path="/login" element={<Login />} />
+        </Routes>
       </main>
 
       <Footer />
