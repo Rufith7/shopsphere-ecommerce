@@ -4,6 +4,10 @@ import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
 
 import "./index.css";
+import "./styles/navbar.css";
+import "./styles/home.css";
+import "./styles/product.css";
+import "./styles/cart.css";
 import App from "./App";
 
 import { store } from "./store/store";
