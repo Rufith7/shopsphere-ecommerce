@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 import {
@@ -40,12 +41,15 @@ function Cart() {
 
               <p>
                 Subtotal: $
-                {Number(item.price.replace("$", "")) * item.quantity}
+                {Number(item.price.replace("$", "")) *
+                  item.quantity}
               </p>
 
               <div style={{ marginBottom: "10px" }}>
                 <button
-                  onClick={() => dispatch(decreaseQuantity(item.id))}
+                  onClick={() =>
+                    dispatch(decreaseQuantity(item.id))
+                  }
                 >
                   -
                 </button>
@@ -55,14 +59,18 @@ function Cart() {
                 </span>
 
                 <button
-                  onClick={() => dispatch(increaseQuantity(item.id))}
+                  onClick={() =>
+                    dispatch(increaseQuantity(item.id))
+                  }
                 >
                   +
                 </button>
               </div>
 
               <button
-                onClick={() => dispatch(removeFromCart(item.id))}
+                onClick={() =>
+                  dispatch(removeFromCart(item.id))
+                }
               >
                 Remove
               </button>
@@ -72,6 +80,12 @@ function Cart() {
           ))}
 
           <h2>Cart Total: ${cartTotal}</h2>
+
+          <br />
+
+          <Link to="/checkout">
+            <button>Proceed to Checkout</button>
+          </Link>
         </>
       )}
     </section>
