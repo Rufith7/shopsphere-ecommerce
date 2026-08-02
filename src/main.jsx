@@ -8,6 +8,8 @@ import "./styles/navbar.css";
 import "./styles/home.css";
 import "./styles/product.css";
 import "./styles/cart.css";
+import "./styles/footer.css";
+
 import App from "./App";
 
 import { store } from "./store/store";

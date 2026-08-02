@@ -11,6 +11,8 @@ import Cart from "./pages/Cart/Cart";
 import Wishlist from "./pages/Wishlist/Wishlist";
 import Login from "./pages/Login/Login";
 import ProductDetails from "./pages/ProductDetails/ProductDetails";
+import Checkout from "./pages/Checkout/Checkout";
+import OrderSuccess from "./pages/OrderSuccess/OrderSuccess";
 
 function App() {
   return (
@@ -19,37 +21,45 @@ function App() {
 
       <main>
         <Routes>
-
-          <Route 
-            path="/" 
-            element={<Home />} 
+          <Route
+            path="/"
+            element={<Home />}
           />
 
-          <Route 
-            path="/products" 
-            element={<Products />} 
+          <Route
+            path="/products"
+            element={<Products />}
           />
 
-          <Route 
-            path="/products/:id" 
-            element={<ProductDetails />} 
+          <Route
+            path="/products/:id"
+            element={<ProductDetails />}
           />
 
-          <Route 
-            path="/cart" 
-            element={<Cart />} 
+          <Route
+            path="/cart"
+            element={<Cart />}
           />
 
-          <Route 
-            path="/wishlist" 
-            element={<Wishlist />} 
+          <Route
+            path="/wishlist"
+            element={<Wishlist />}
           />
 
-          <Route 
-            path="/login" 
-            element={<Login />} 
+          <Route
+            path="/login"
+            element={<Login />}
           />
 
+          <Route
+            path="/checkout"
+            element={<Checkout />}
+          />
+
+          <Route
+            path="/order-success"
+            element={<OrderSuccess />}
+          />
         </Routes>
       </main>
 
