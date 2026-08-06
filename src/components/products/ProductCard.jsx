@@ -1,13 +1,19 @@
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import { toast } from "react-toastify";
 
 import { addToCart } from "../../features/cart/cartSlice";
-import { toggleWishlist } from "../../features/wishlist/wishlistSlice";
+import {
+  addToWishlist,
+  removeFromWishlist,
+} from "../../features/wishlist/wishlistSlice";
 
 function ProductCard({ id, title, price, image }) {
   const dispatch = useDispatch();
 
-  const wishlistItems = useSelector((state) => state.wishlist.items);
+  const wishlistItems = useSelector(
+    (state) => state.wishlist.items
+  );
 
   const isWishlisted = wishlistItems.some(
     (item) => item.id === id
@@ -18,6 +24,24 @@ function ProductCard({ id, title, price, image }) {
     title,
     price,
     image,
+  };
+
+  const handleAddToCart = () => {
+    dispatch(addToCart(product));
+
+    toast.success("🛒 Product added to cart!");
+  };
+
+  const handleWishlist = () => {
+    if (isWishlisted) {
+      dispatch(removeFromWishlist(id));
+
+      toast.info("💔 Removed from wishlist");
+    } else {
+      dispatch(addToWishlist(product));
+
+      toast.success("❤️ Added to wishlist");
+    }
   };
 
   return (
@@ -31,16 +55,14 @@ function ProductCard({ id, title, price, image }) {
 
       <p className="price">{price}</p>
 
-      <button
-        onClick={() => dispatch(addToCart(product))}
-      >
+      <button onClick={handleAddToCart}>
         🛒 Add to Cart
       </button>
 
-      <button
-        onClick={() => dispatch(toggleWishlist(product))}
-      >
-        {isWishlisted ? "❤️ Remove Wishlist" : "🤍 Add Wishlist"}
+      <button onClick={handleWishlist}>
+        {isWishlisted
+          ? "❤️ Remove Wishlist"
+          : "🤍 Add to Wishlist"}
       </button>
 
       <Link to={`/products/${id}`}>
