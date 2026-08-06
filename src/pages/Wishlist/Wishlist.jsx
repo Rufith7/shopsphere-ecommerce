@@ -1,6 +1,8 @@
-import { useSelector, useDispatch } from "react-redux";
-import { toggleWishlist } from "../../features/wishlist/wishlistSlice";
 import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+
+import { addToCart } from "../../features/cart/cartSlice";
+import { removeFromWishlist } from "../../features/wishlist/wishlistSlice";
 
 function Wishlist() {
   const dispatch = useDispatch();
@@ -8,6 +10,11 @@ function Wishlist() {
   const wishlistItems = useSelector(
     (state) => state.wishlist.items
   );
+
+  const moveToCart = (item) => {
+    dispatch(addToCart(item));
+    dispatch(removeFromWishlist(item.id));
+  };
 
   return (
     <section className="wishlist-page">
@@ -33,7 +40,15 @@ function Wishlist() {
             <p>{item.price}</p>
 
             <button
-              onClick={() => dispatch(toggleWishlist(item))}
+              onClick={() => moveToCart(item)}
+            >
+              🛒 Move to Cart
+            </button>
+
+            <button
+              onClick={() =>
+                dispatch(removeFromWishlist(item.id))
+              }
             >
               Remove
             </button>
@@ -42,7 +57,9 @@ function Wishlist() {
             <br />
 
             <Link to={`/products/${item.id}`}>
-              <button>View Details</button>
+              <button>
+                View Details
+              </button>
             </Link>
 
             <hr />

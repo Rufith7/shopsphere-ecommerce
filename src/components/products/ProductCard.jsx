@@ -2,7 +2,10 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 import { addToCart } from "../../features/cart/cartSlice";
-import { toggleWishlist } from "../../features/wishlist/wishlistSlice";
+import {
+  addToWishlist,
+  removeFromWishlist,
+} from "../../features/wishlist/wishlistSlice";
 
 function ProductCard({ id, title, price, image }) {
   const dispatch = useDispatch();
@@ -18,6 +21,14 @@ function ProductCard({ id, title, price, image }) {
     title,
     price,
     image,
+  };
+
+  const handleWishlist = () => {
+    if (isWishlisted) {
+      dispatch(removeFromWishlist(id));
+    } else {
+      dispatch(addToWishlist(product));
+    }
   };
 
   return (
@@ -37,10 +48,10 @@ function ProductCard({ id, title, price, image }) {
         🛒 Add to Cart
       </button>
 
-      <button
-        onClick={() => dispatch(toggleWishlist(product))}
-      >
-        {isWishlisted ? "❤️ Remove Wishlist" : "🤍 Add Wishlist"}
+      <button onClick={handleWishlist}>
+        {isWishlisted
+          ? "❤️ Remove Wishlist"
+          : "🤍 Add to Wishlist"}
       </button>
 
       <Link to={`/products/${id}`}>
