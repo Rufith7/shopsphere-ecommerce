@@ -1,36 +1,102 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { toast } from "react-toastify";
+
 import { addToCart } from "../../../features/cart/cartSlice";
+
+import {
+  addToWishlist,
+  removeFromWishlist,
+} from "../../../features/wishlist/wishlistSlice";
 
 function ProductInfo({ product }) {
   const dispatch = useDispatch();
 
+  const wishlistItems = useSelector(
+    (state) => state.wishlist.items
+  );
+
+  const isWishlisted = wishlistItems.some(
+    (item) => item.id === product.id
+  );
+
   const handleAddToCart = () => {
     dispatch(addToCart(product));
-    console.log("Added to cart:", product);
+
+    toast.success(
+      `${product.title} added to cart`,
+      {
+        position: "bottom-right",
+        autoClose: 1800,
+      }
+    );
+  };
+
+  const handleWishlist = () => {
+    if (isWishlisted) {
+      dispatch(removeFromWishlist(product.id));
+
+      toast.info("Removed from wishlist", {
+        position: "bottom-right",
+        autoClose: 1800,
+      });
+    } else {
+      dispatch(addToWishlist(product));
+
+      toast.success("Added to wishlist", {
+        position: "bottom-right",
+        autoClose: 1800,
+      });
+    }
   };
 
   return (
-    <div className="product-info">
+    <div className="product-details-info">
+      <span className="details-category">
+        {product.category}
+      </span>
+
       <h1>{product.title}</h1>
 
-      <h2>{product.price}</h2>
+      <p className="details-brand">
+        by {product.brand}
+      </p>
 
-      <div className="rating">
-        ⭐⭐⭐⭐⭐
+      <div className="details-rating">
+        <span>★</span>
+        {product.rating} / 5
       </div>
 
-      <p>
-        This is a premium quality product with
-        excellent performance and modern design.
+      <div className="details-price">
+        {product.price}
+      </div>
+
+      <p className="details-description">
+        {product.description}
       </p>
 
-      <p>
-        Category: {product.category}
-      </p>
+      <span className="details-stock">
+        {product.stock > 10
+          ? `✓ In stock · ${product.stock} available`
+          : `⚡ Only ${product.stock} left`}
+      </span>
 
-      <button onClick={handleAddToCart}>
-        🛒 Add to Cart
-      </button>
+      <div className="details-actions">
+        <button
+          className="details-cart-btn"
+          onClick={handleAddToCart}
+        >
+          🛒 Add to Cart
+        </button>
+
+        <button
+          className="details-wishlist-btn"
+          onClick={handleWishlist}
+        >
+          {isWishlisted
+            ? "♥ Wishlisted"
+            : "♡ Wishlist"}
+        </button>
+      </div>
     </div>
   );
 }

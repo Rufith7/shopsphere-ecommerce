@@ -1,8 +1,13 @@
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import { toast } from "react-toastify";
 
 import { addToCart } from "../../features/cart/cartSlice";
-import { removeFromWishlist } from "../../features/wishlist/wishlistSlice";
+
+import {
+  removeFromWishlist,
+  clearWishlist,
+} from "../../features/wishlist/wishlistSlice";
 
 function Wishlist() {
   const dispatch = useDispatch();
@@ -11,62 +16,142 @@ function Wishlist() {
     (state) => state.wishlist.items
   );
 
-  const moveToCart = (item) => {
+  const handleMoveToCart = (item) => {
     dispatch(addToCart(item));
     dispatch(removeFromWishlist(item.id));
+
+    toast.success(
+      `${item.title} moved to cart`,
+      {
+        position: "bottom-right",
+        autoClose: 1800,
+      }
+    );
   };
 
-  return (
-    <section className="wishlist-page">
-      <h1>❤️ My Wishlist</h1>
+  const handleRemove = (id) => {
+    dispatch(removeFromWishlist(id));
 
-      {wishlistItems.length === 0 ? (
-        <p>Your wishlist is empty.</p>
-      ) : (
-        wishlistItems.map((item) => (
-          <div
-            key={item.id}
-            className="wishlist-item"
-            style={{ marginBottom: "20px" }}
+    toast.info("Removed from wishlist", {
+      position: "bottom-right",
+      autoClose: 1800,
+    });
+  };
+
+  if (wishlistItems.length === 0) {
+    return (
+      <main className="wishlist-page">
+        <div className="empty-wishlist">
+          <div className="empty-icon">♡</div>
+
+          <h1>Your wishlist is empty</h1>
+
+          <p>
+            Save products you love and come back
+            to them anytime.
+          </p>
+
+          <Link
+            to="/products"
+            className="primary-action"
           >
-            <img
-              src={item.image}
-              alt={item.title}
-              width="120"
-            />
+            Explore Products →
+          </Link>
+        </div>
+      </main>
+    );
+  }
 
-            <h3>{item.title}</h3>
+  return (
+    <main className="wishlist-page">
+      <section className="wishlist-header">
+        <div>
+          <span className="eyebrow">
+            SAVED FOR LATER
+          </span>
 
-            <p>{item.price}</p>
+          <h1>My Wishlist</h1>
 
-            <button
-              onClick={() => moveToCart(item)}
-            >
-              🛒 Move to Cart
-            </button>
+          <p>
+            {wishlistItems.length}{" "}
+            {wishlistItems.length === 1
+              ? "product"
+              : "products"}{" "}
+            saved.
+          </p>
+        </div>
 
-            <button
-              onClick={() =>
-                dispatch(removeFromWishlist(item.id))
-              }
-            >
-              Remove
-            </button>
+        <button
+          className="clear-wishlist-btn"
+          onClick={() => {
+            dispatch(clearWishlist());
 
-            <br />
-            <br />
+            toast.info("Wishlist cleared");
+          }}
+        >
+          Clear Wishlist
+        </button>
+      </section>
 
-            <Link to={`/products/${item.id}`}>
-              <button>
-                View Details
-              </button>
-            </Link>
+      <section className="wishlist-grid">
+        {wishlistItems.map((item) => (
+          <article
+            className="wishlist-card"
+            key={item.id}
+          >
+            <div className="wishlist-image">
+              <img
+                src={item.image}
+                alt={item.title}
+              />
+            </div>
 
-            <hr />
-          </div>
-        ))
-      )}
-    </section>
+            <div className="wishlist-content">
+              <span>
+                {item.category}
+              </span>
+
+              <h3>{item.title}</h3>
+
+              <p className="wishlist-brand">
+                {item.brand}
+              </p>
+
+              <div className="wishlist-price">
+                {item.price}
+              </div>
+
+              <div className="wishlist-actions">
+                <button
+                  className="wishlist-cart-btn"
+                  onClick={() =>
+                    handleMoveToCart(item)
+                  }
+                >
+                  🛒 Move to Cart
+                </button>
+
+                <button
+                  className="wishlist-remove-btn"
+                  onClick={() =>
+                    handleRemove(item.id)
+                  }
+                >
+                  Remove
+                </button>
+              </div>
+
+              <Link
+                to={`/products/${item.id}`}
+                className="wishlist-details"
+              >
+                View Details →
+              </Link>
+            </div>
+          </article>
+        ))}
+      </section>
+    </main>
   );
 }
 

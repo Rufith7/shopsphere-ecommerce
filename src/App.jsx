@@ -1,30 +1,25 @@
-import "./App.css";
-
 import { Routes, Route } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
 
 import Navbar from "./components/layout/Navbar";
 import Footer from "./components/layout/Footer";
 
 import Home from "./pages/Home/Home";
 import Products from "./pages/Products/Products";
-import Cart from "./pages/Cart/Cart";
 import Wishlist from "./pages/Wishlist/Wishlist";
-import Login from "./pages/Login/Login";
+import Cart from "./pages/Cart/Cart";
 import ProductDetails from "./pages/ProductDetails/ProductDetails";
 import Checkout from "./pages/Checkout/Checkout";
 import OrderSuccess from "./pages/OrderSuccess/OrderSuccess";
 
 function App() {
   return (
-    <>
+    <div className="app">
       <Navbar />
 
-      <main>
+      <main className="app-main">
         <Routes>
-          <Route
-            path="/"
-            element={<Home />}
-          />
+          <Route path="/" element={<Home />} />
 
           <Route
             path="/products"
@@ -37,18 +32,13 @@ function App() {
           />
 
           <Route
-            path="/cart"
-            element={<Cart />}
-          />
-
-          <Route
             path="/wishlist"
             element={<Wishlist />}
           />
 
           <Route
-            path="/login"
-            element={<Login />}
+            path="/cart"
+            element={<Cart />}
           />
 
           <Route
@@ -64,7 +54,15 @@ function App() {
       </main>
 
       <Footer />
-    </>
+
+      <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        newestOnTop
+        closeOnClick
+        pauseOnHover
+      />
+    </div>
   );
 }
 
