@@ -1,46 +1,30 @@
 import ProductCard from "./ProductCard";
 
-import products from "../../data/products";
-
-
-function ProductGrid() {
+function ProductGrid({ products = [] }) {
+  if (products.length === 0) {
+    return (
+      <div className="empty-products">
+        <div className="empty-products-icon">🔎</div>
+        <h2>No products found</h2>
+        <p>
+          Try changing your search or selecting a different category.
+        </p>
+      </div>
+    );
+  }
 
   return (
-
     <section className="products-section">
-
-      <h2>
-        Featured Products
-      </h2>
-
-
       <div className="products-grid">
-
         {products.map((product) => (
-
           <ProductCard
-
             key={product.id}
-
-            id={product.id}
-
-            title={product.title}
-
-            price={product.price}
-
-            image={product.image}
-
+            {...product}
           />
-
         ))}
-
       </div>
-
     </section>
-
   );
-
 }
-
 
 export default ProductGrid;

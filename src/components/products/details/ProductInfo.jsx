@@ -8,141 +8,97 @@ import {
   removeFromWishlist,
 } from "../../../features/wishlist/wishlistSlice";
 
-
 function ProductInfo({ product }) {
-
   const dispatch = useDispatch();
-
 
   const wishlistItems = useSelector(
     (state) => state.wishlist.items
   );
 
-
   const isWishlisted = wishlistItems.some(
     (item) => item.id === product.id
   );
 
-
-  const handleCart = () => {
-
+  const handleAddToCart = () => {
     dispatch(addToCart(product));
 
     toast.success(
-      `${product.title} added to cart`
+      `${product.title} added to cart`,
+      {
+        position: "bottom-right",
+        autoClose: 1800,
+      }
     );
-
   };
-
 
   const handleWishlist = () => {
-
     if (isWishlisted) {
+      dispatch(removeFromWishlist(product.id));
 
-      dispatch(
-        removeFromWishlist(product.id)
-      );
-
-      toast.info(
-        `${product.title} removed from wishlist`
-      );
-
+      toast.info("Removed from wishlist", {
+        position: "bottom-right",
+        autoClose: 1800,
+      });
     } else {
+      dispatch(addToWishlist(product));
 
-      dispatch(
-        addToWishlist(product)
-      );
-
-      toast.success(
-        `${product.title} added to wishlist`
-      );
-
+      toast.success("Added to wishlist", {
+        position: "bottom-right",
+        autoClose: 1800,
+      });
     }
-
   };
 
-
   return (
+    <div className="product-details-info">
+      <span className="details-category">
+        {product.category}
+      </span>
 
-    <div className="product-info">
+      <h1>{product.title}</h1>
 
+      <p className="details-brand">
+        by {product.brand}
+      </p>
 
-      <h1>
-        {product.title}
-      </h1>
-
-
-      <h2>
-        {product.price}
-      </h2>
-
-
-      <div className="rating">
-
-        ⭐ {product.rating}/5
-
+      <div className="details-rating">
+        <span>★</span>
+        {product.rating} / 5
       </div>
 
+      <div className="details-price">
+        {product.price}
+      </div>
 
-
-      <p>
+      <p className="details-description">
         {product.description}
       </p>
 
+      <span className="details-stock">
+        {product.stock > 10
+          ? `✓ In stock · ${product.stock} available`
+          : `⚡ Only ${product.stock} left`}
+      </span>
 
+      <div className="details-actions">
+        <button
+          className="details-cart-btn"
+          onClick={handleAddToCart}
+        >
+          🛒 Add to Cart
+        </button>
 
-      <p>
-        <strong>
-          Brand:
-        </strong>{" "}
-        {product.brand}
-      </p>
-
-
-
-      <p>
-        <strong>
-          Category:
-        </strong>{" "}
-        {product.category}
-      </p>
-
-
-
-      <p>
-        <strong>
-          Available Stock:
-        </strong>{" "}
-        {product.stock}
-      </p>
-
-
-
-      <button
-        onClick={handleCart}
-      >
-        🛒 Add to Cart
-      </button>
-
-
-
-      <button
-        onClick={handleWishlist}
-      >
-        {
-          isWishlisted
-            ? "❤️ Remove Wishlist"
-            : "🤍 Add Wishlist"
-        }
-
-      </button>
-
-
+        <button
+          className="details-wishlist-btn"
+          onClick={handleWishlist}
+        >
+          {isWishlisted
+            ? "♥ Wishlisted"
+            : "♡ Wishlist"}
+        </button>
+      </div>
     </div>
-
   );
-
 }
-
 
 export default ProductInfo;

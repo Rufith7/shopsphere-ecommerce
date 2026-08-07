@@ -1,0 +1,178 @@
+/* =========================================
+   ORDER SUCCESS
+========================================= */
+
+.order-success-page {
+  min-height: calc(100vh - 150px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 70px 20px;
+  background:
+    radial-gradient(
+      circle at top,
+      rgba(37, 99, 235, 0.08),
+      transparent 45%
+    ),
+    #f6f8fc;
+}
+
+.success-card {
+  width: 100%;
+  max-width: 700px;
+  padding: 55px 45px;
+  border: 1px solid #e5e7eb;
+  border-radius: 28px;
+  background: #ffffff;
+  text-align: center;
+  box-shadow:
+    0 25px 70px rgba(15, 23, 42, 0.1);
+}
+
+.success-icon {
+  width: 86px;
+  height: 86px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 25px;
+  border-radius: 50%;
+  background: #dcfce7;
+  color: #16a34a;
+  font-size: 48px;
+  font-weight: 800;
+  animation: successPop 0.5s ease;
+}
+
+.success-label {
+  display: inline-block;
+  margin-bottom: 12px;
+  color: #16a34a;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 2px;
+}
+
+.success-card h1 {
+  margin: 0;
+  color: #111827;
+  font-size: clamp(30px, 5vw, 44px);
+}
+
+.success-message {
+  max-width: 520px;
+  margin: 18px auto 35px;
+  color: #6b7280;
+  font-size: 16px;
+  line-height: 1.7;
+}
+
+.order-info {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  margin-bottom: 30px;
+  overflow: hidden;
+  border: 1px solid #e5e7eb;
+  border-radius: 14px;
+  background: #e5e7eb;
+}
+
+.order-info > div {
+  padding: 18px 10px;
+  background: #f9fafb;
+}
+
+.order-info span {
+  display: block;
+  margin-bottom: 6px;
+  color: #6b7280;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.order-info strong {
+  display: block;
+  color: #111827;
+  font-size: 15px;
+}
+
+.success-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+}
+
+.primary-success-button,
+.secondary-success-button {
+  padding: 14px 24px;
+  border-radius: 11px;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.primary-success-button {
+  border: none;
+  background: #2563eb;
+  color: #ffffff;
+}
+
+.primary-success-button:hover {
+  background: #1d4ed8;
+  transform: translateY(-1px);
+}
+
+.secondary-success-button {
+  border: 1px solid #d1d5db;
+  background: #ffffff;
+  color: #374151;
+}
+
+.secondary-success-button:hover {
+  border-color: #2563eb;
+  color: #2563eb;
+}
+
+.success-note {
+  margin: 25px 0 0;
+  color: #9ca3af;
+  font-size: 13px;
+}
+
+@keyframes successPop {
+  0% {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+
+  70% {
+    transform: scale(1.08);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@media (max-width: 600px) {
+  .success-card {
+    padding: 40px 22px;
+  }
+
+  .order-info {
+    grid-template-columns: 1fr;
+  }
+
+  .success-actions {
+    flex-direction: column;
+  }
+
+  .primary-success-button,
+  .secondary-success-button {
+    width: 100%;
+  }
+}

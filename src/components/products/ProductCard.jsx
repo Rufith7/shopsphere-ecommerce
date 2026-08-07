@@ -8,7 +8,16 @@ import {
   removeFromWishlist,
 } from "../../features/wishlist/wishlistSlice";
 
-function ProductCard({ id, title, price, image }) {
+function ProductCard({
+  id,
+  title,
+  price,
+  image,
+  category,
+  brand,
+  rating,
+  stock,
+}) {
   const dispatch = useDispatch();
 
   const wishlistItems = useSelector(
@@ -24,53 +33,104 @@ function ProductCard({ id, title, price, image }) {
     title,
     price,
     image,
+    category,
+    brand,
+    rating,
+    stock,
   };
 
-  const handleAddToCart = () => {
+  const handleCart = () => {
     dispatch(addToCart(product));
 
-    toast.success("🛒 Product added to cart!");
+    toast.success(`${title} added to cart`, {
+      position: "bottom-right",
+      autoClose: 1800,
+    });
   };
 
   const handleWishlist = () => {
     if (isWishlisted) {
       dispatch(removeFromWishlist(id));
 
-      toast.info("💔 Removed from wishlist");
+      toast.info(`${title} removed from wishlist`, {
+        position: "bottom-right",
+        autoClose: 1800,
+      });
     } else {
       dispatch(addToWishlist(product));
 
-      toast.success("❤️ Added to wishlist");
+      toast.success(`${title} added to wishlist`, {
+        position: "bottom-right",
+        autoClose: 1800,
+      });
     }
   };
 
   return (
-    <div className="product-card">
-      <img
-        src={image}
-        alt={title}
-      />
+    <article className="product-card">
+      <div className="product-image-wrapper">
+        <img
+          src={image}
+          alt={title}
+          className="product-card-image"
+        />
 
-      <h3>{title}</h3>
-
-      <p className="price">{price}</p>
-
-      <button onClick={handleAddToCart}>
-        🛒 Add to Cart
-      </button>
-
-      <button onClick={handleWishlist}>
-        {isWishlisted
-          ? "❤️ Remove Wishlist"
-          : "🤍 Add to Wishlist"}
-      </button>
-
-      <Link to={`/products/${id}`}>
-        <button>
-          View Details
+        <button
+          className={`wishlist-icon ${
+            isWishlisted ? "wishlisted" : ""
+          }`}
+          onClick={handleWishlist}
+          aria-label="Toggle wishlist"
+        >
+          {isWishlisted ? "♥" : "♡"}
         </button>
-      </Link>
-    </div>
+      </div>
+
+      <div className="product-card-content">
+        <span className="product-category">
+          {category}
+        </span>
+
+        <h3>{title}</h3>
+
+        <p className="product-brand">
+          {brand}
+        </p>
+
+        <div className="product-rating">
+          <span>★</span>
+          {rating}
+        </div>
+
+        <div className="product-card-bottom">
+          <span className="price">
+            {price}
+          </span>
+
+          <span className="stock">
+            {stock > 10
+              ? "In Stock"
+              : `Only ${stock} left`}
+          </span>
+        </div>
+
+        <div className="product-card-actions">
+          <button
+            className="add-cart-btn"
+            onClick={handleCart}
+          >
+            🛒 Add to Cart
+          </button>
+
+          <Link
+            to={`/products/${id}`}
+            className="details-btn"
+          >
+            View Details
+          </Link>
+        </div>
+      </div>
+    </article>
   );
 }
 
