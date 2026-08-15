@@ -1,5 +1,13 @@
-# ShopSphere - Modern E-Commerce Application
+<img width="1440" height="900" alt="Screenshot 2026-08-15 at 12 26 10 PM" src="https://github.com/user-attachments/assets/2c778d49-8a0a-42ef-a7cb-d839d32e3fec" />
+<img width="1440" height="900" alt="Screenshot 2026-08-15 at 12 26 23 PM" src="https://github.com/user-attachments/assets/0a79c771-7c02-4dfb-93a2-ebda7fd291fb" />
+<img width="1440" height="900" alt="Screenshot 2026-08-15 at 12 29 00 PM" src="https://github.com/user-attachments/assets/31d9dadc-0259-410d-959d-e813a1b8db37" />
+<img width="1440" height="900" alt="Screenshot 2026-08-15 at 12 27 40 PM" src="https://github.com/user-attachments/assets/86b041e9-b951-46ac-b10e-868b1abc4787" />
+<img width="1440" height="900" alt="Screenshot 2026-08-15 at 12 27 56 PM" src="https://github.com/user-attachments/assets/1b994e48-9939-4e6d-8bfe-34b32df20368" />
+<img width="1440" height="900" alt="Screenshot 2026-08-15 at 12 28 34 PM" src="https://github.com/user-attachments/assets/b57a0491-61a6-4729-b632-63daa7ef94be" />
+<img width="1440" height="900" alt="Screenshot 2026-08-15 at 12 28 41 PM" src="https://github.com/user-attachments/assets/ee17217e-fda9-444d-90cd-45fadaa9e5c3" />
 
+# ShopSphere - Modern E-Commerce Application
+# Live Deployed Link: https://shopsphere-ecommerce-three.vercel.app/ 
 ShopSphere is a modern, responsive e-commerce web application built with React.js and Redux Toolkit.
 
 The application provides a complete shopping experience including product browsing, search, category filtering, wishlist management, shopping cart functionality, checkout, and order confirmation.
